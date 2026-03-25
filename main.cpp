@@ -52,33 +52,29 @@ int main()
     // OnTransition fires after every completed state action.
     // fromState == toState indicates a self-transition.
     auto syncConn = syncMotor.OnTransition.Connect(
-        MakeDelegate(std::function<void(uint8_t, uint8_t)>(
-            [](uint8_t from, uint8_t to) {
+        MakeDelegate([](uint8_t from, uint8_t to) {
                 cout << "  [transition " << (int)from << " -> " << (int)to << "]" << endl;
-            })));
+            }));
 
     // OnEntry/OnExit fire on every actual state change — not on self-transitions.
     // OnExit fires before the new state's entry action; OnEntry before its action.
     auto entryConn = syncMotor.OnEntry.Connect(
-        MakeDelegate(std::function<void(uint8_t)>(
-            [](uint8_t state) {
+        MakeDelegate([](uint8_t state) {
                 cout << "  [entry " << (int)state << "]" << endl;
-            })));
+            }));
 
     auto exitConn = syncMotor.OnExit.Connect(
-        MakeDelegate(std::function<void(uint8_t)>(
-            [](uint8_t state) {
+        MakeDelegate([](uint8_t state) {
                 cout << "  [exit " << (int)state << "]" << endl;
-            })));
+            }));
 
     // OnCannotHappen fires before FaultHandler (which calls abort) when a
     // CANNOT_HAPPEN transition is taken. Use this to flush logs, record the
     // offending state, or trigger a controlled shutdown before the process dies.
     auto faultConn = syncMotor.OnCannotHappen.Connect(
-        MakeDelegate(std::function<void(uint8_t)>(
-            [](uint8_t state) {
+        MakeDelegate([](uint8_t state) {
                 cerr << "  [CANNOT_HAPPEN from state " << (int)state << "]" << endl;
-            })));
+            }));
 
     auto d1 = xmake_shared<MotorData>(); d1->speed = 100;
     syncMotor.SetSpeed(d1);   // blocks — state executes before returning
@@ -104,11 +100,10 @@ int main()
     asyncMotor.SetThread(smThread);
 
     auto asyncConn = asyncMotor.OnTransition.Connect(
-        MakeDelegate(std::function<void(uint8_t, uint8_t)>(
-            [](uint8_t from, uint8_t to) {
+        MakeDelegate([](uint8_t from, uint8_t to) {
                 // Fires on smThread — output may interleave with main thread cout
                 cout << "  [async transition " << (int)from << " -> " << (int)to << "]" << endl;
-            })));
+            }));
 
     auto a1 = xmake_shared<MotorData>(); a1->speed = 100;
     cout << "Posting SetSpeed(100)..." << endl;
@@ -151,9 +146,9 @@ int main()
 
     std::promise<void> testDone;
     auto testDoneConn = test.OnComplete.Connect(
-        MakeDelegate(std::function<void()>([&testDone]() {
+        MakeDelegate([&testDone]() {
             testDone.set_value();
-        })));
+        }));
 
     test.Cancel();
     test.Start();
@@ -167,10 +162,9 @@ int main()
     TcpConnection tcp;
     
     auto tcpConn = tcp.OnTransition.Connect(
-        MakeDelegate(std::function<void(uint8_t, uint8_t)>(
-            [](uint8_t from, uint8_t to) {
+        MakeDelegate([](uint8_t from, uint8_t to) {
                 cout << "  [TCP transition " << (int)from << " -> " << (int)to << "]" << endl;
-            })));
+            }));
 
     cout << "Initiating Active Open..." << endl;
     tcp.ActiveOpen();
