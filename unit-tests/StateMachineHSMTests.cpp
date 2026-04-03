@@ -5,7 +5,7 @@
 #include "StateMachineHSMTests.h"
 #include "state-machine/StateMachineHSM.h"
 #include "examples/AlarmPanel.h"
-#include "delegate-mq/predef/util/Fault.h"
+#include "delegate-mq/extras/util/Fault.h"
 #include <iostream>
 #include <vector>
 #include <string>

@@ -23,7 +23,7 @@
 #include <typeinfo>
 #include <memory>
 #include "delegate-mq/DelegateMQ.h"
-#include "delegate-mq/predef/util/Fault.h"
+#include "delegate-mq/extras/util/Fault.h"
 
 /// @brief Unique state machine event data must inherit from this class.
 class EventData

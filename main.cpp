@@ -12,8 +12,8 @@
 #include "unit-tests/StateMachineTests.h"
 #include "unit-tests/StateMachineHSMTests.h"
 #include "delegate-mq/DelegateMQ.h"
-#include "delegate-mq/predef/util/Fault.h"
-#include "delegate-mq/predef/util/Timer.h"
+#include "delegate-mq/extras/util/Fault.h"
+#include "delegate-mq/extras/util/Timer.h"
 #include <iostream>
 #include <atomic>
 #include <future>

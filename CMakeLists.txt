@@ -27,14 +27,15 @@ file(GLOB EXAMPLE_SOURCES "${CMAKE_SOURCE_DIR}/examples/*.cpp"
 file(GLOB TEST_SOURCES "${CMAKE_SOURCE_DIR}/unit-tests/*.cpp"
                        "${CMAKE_SOURCE_DIR}/unit-tests/*.h")
 
-list(APPEND SOURCES ${SM_SOURCES} ${EXAMPLE_SOURCES} ${TEST_SOURCES} ${DMQ_PREDEF_SOURCES})
+list(APPEND SOURCES ${SM_SOURCES} ${EXAMPLE_SOURCES} ${TEST_SOURCES} ${DMQ_PORT_SOURCES})
 
 # Organize files in IDE (Visual Studio Solution Explorer)
 source_group("State Machine"   FILES ${SM_SOURCES})
 source_group("Examples"        FILES ${EXAMPLE_SOURCES})
 source_group("Unit Tests"      FILES ${TEST_SOURCES})
-source_group("Delegate Files"  FILES ${DMQ_LIB_SOURCES})
-source_group("Predef Files"    FILES ${DMQ_PREDEF_SOURCES})
+source_group("Delegate Files" FILES ${DMQ_LIB_SOURCES})
+source_group("Port Files" FILES ${DMQ_PORT_ONLY_SOURCES})
+source_group("Extras Files" FILES ${DMQ_EXTRAS_SOURCES})
 
 include_directories(
     ${CMAKE_SOURCE_DIR}

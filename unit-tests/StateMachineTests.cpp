@@ -5,7 +5,7 @@
 #include "StateMachineTests.h"
 #include "state-machine/StateMachine.h"
 #include "examples/Motor.h"
-#include "delegate-mq/predef/util/Fault.h"
+#include "delegate-mq/extras/util/Fault.h"
 #include <iostream>
 #include <atomic>
 #include <thread>

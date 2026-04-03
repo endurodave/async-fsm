@@ -2,7 +2,7 @@
 #define _CENTRIFUGE_TEST_H
 
 #include "SelfTest.h"
-#include "delegate-mq/predef/util/Timer.h"
+#include "delegate-mq/extras/util/Timer.h"
 
 /// @brief CentrifugeTest demonstrates state machine inheritance, state function
 /// override, guard/entry/exit actions, and timer-driven polling. The SM runs as
